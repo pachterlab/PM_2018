@@ -1,0 +1,13 @@
+THREAD = 8
+
+rule run_10XGv2_brain2k:
+    output:
+        "10XGv2_brain2k_out/outs/metrics_summary.csv"
+    benchmark:
+        "benchmarks/10XGv2_brain2k.txt"
+    shell:
+        """
+         rm -r 10XGv2_brain2k_out
+         ~/software/cellranger-2.1.0/cellranger count --id=10XGv2_brain2k_out --transcriptome=index/mouse_10XGv2_primary --fastqs=10XGv2/nuclei_2k_fastqs --localcores={THREAD} --nosecondary
+        """
+

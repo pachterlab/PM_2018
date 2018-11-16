@@ -1,0 +1,22 @@
+THREAD = 8
+
+
+rule run_salmon_hgmm6k:
+    output:
+        "salmon_hgmm6k_out/alevin/quants_mat.gz"
+    benchmark:
+        "benchmarks/salmon_hgmm6k.txt"
+    shell:
+        """
+         ~/software/salmon-0.11.3-linux_x86_64/bin/salmon alevin -lISR -1 10XGv2/fastqs/hgmm_6k_S1_L001_R1_001.fastq.gz \
+             10XGv2/fastqs/hgmm_6k_S1_L002_R1_001.fastq.gz 10XGv2/fastqs/hgmm_6k_S1_L003_R1_001.fastq.gz \
+             10XGv2/fastqs/hgmm_6k_S1_L004_R1_001.fastq.gz 10XGv2/fastqs/hgmm_6k_S1_L005_R1_001.fastq.gz \
+             10XGv2/fastqs/hgmm_6k_S1_L006_R1_001.fastq.gz 10XGv2/fastqs/hgmm_6k_S1_L007_R1_001.fastq.gz \
+             10XGv2/fastqs/hgmm_6k_S1_L008_R1_001.fastq.gz -2 10XGv2/fastqs/hgmm_6k_S1_L001_R2_001.fastq.gz \
+             10XGv2/fastqs/hgmm_6k_S1_L002_R2_001.fastq.gz 10XGv2/fastqs/hgmm_6k_S1_L003_R2_001.fastq.gz \
+             10XGv2/fastqs/hgmm_6k_S1_L004_R2_001.fastq.gz 10XGv2/fastqs/hgmm_6k_S1_L005_R2_001.fastq.gz \
+             10XGv2/fastqs/hgmm_6k_S1_L006_R2_001.fastq.gz 10XGv2/fastqs/hgmm_6k_S1_L007_R2_001.fastq.gz \
+             10XGv2/fastqs/hgmm_6k_S1_L008_R2_001.fastq.gz --chromium -i index/salmon_index_human_mouse -p {THREAD} -o salmon_hgmm6k_out \
+             --tgMap index/txp2gene_human_mouse.tsv
+        """
+

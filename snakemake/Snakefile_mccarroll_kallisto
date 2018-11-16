@@ -1,0 +1,19 @@
+THREAD = 8
+
+rule all:
+    input:
+        "kallisto_mccarroll_out/matrix.ec"
+
+rule run_kallisto_mccarroll:
+    output:
+        "kallisto_mccarroll_out/matrix.ec"
+    benchmark:
+        "benchmarks/kallisto_mccarroll.txt"
+    shell:
+        """
+         /home/pmelsted/kallisto/build/src/kallisto bus -i index/Mus_musculus.GRCm38.cdna.all.fa.kidx -x DropSeq -t {THREAD} -o kallisto_mccarroll_out \
+               dropseq/SRR1853178_1.fastq dropseq/SRR1853178_2.fastq
+         /home/pmelsted/bustools/build/src/bustools sort -t {THREAD} -o kallisto_mccarroll_out/output.sort.bus kallisto_mccarroll_out/output.bus
+         /home/pmelsted/bustools/build/src/bustools dump -o kallisto_mccarroll_out/output.sort.txt kallisto_mccarroll_out/output.sort.bus
+        """
+

@@ -1,0 +1,14 @@
+THREAD = 8
+
+
+rule run_salmon_mccarroll:
+    output:
+        "salmon_mccarroll_out/alevin/quants_mat.gz"
+    benchmark:
+        "benchmarks/salmon_mccarroll.txt"
+    shell:
+        """
+         ~/software/salmon-0.11.3-linux_x86_64/bin/salmon alevin -lISR -1 dropseq/SRR1853178_1.fastq -2 dropseq/SRR1853178_2.fastq \
+             --dropseq -i index/salmon_index_mouse -p {THREAD} -o salmon_mccarroll_out --tgMap index/txp2gene_mouse.tsv
+        """
+

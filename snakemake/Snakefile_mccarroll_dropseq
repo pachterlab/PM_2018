@@ -1,0 +1,13 @@
+THREAD = 8
+
+rule run_dropseq_mccarroll:
+    output:
+        "dropseq_mccarroll_out/out_gene_exon_tagged.dge.txt.gz"
+    benchmark:
+        "benchmarks/dropseq_mccarroll.txt"
+    shell:
+        """
+         cd dropseq
+         bash ~/Data_single_cell/kallisto_benchmark/dropseq/run_dropseq {THREAD}
+        """
+

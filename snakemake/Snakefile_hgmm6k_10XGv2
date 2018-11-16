@@ -1,0 +1,13 @@
+THREAD = 8
+
+rule run_10XGv2_hgmm6k:
+    output:
+        "10XGv2_hgmm6k_out/outs/metrics_summary.csv"
+    benchmark:
+        "benchmarks/10XGv2_hgmm6k.txt"
+    shell:
+        """
+         rm -r 10XGv2_hgmm6k_out
+         ~/software/cellranger-2.1.0/cellranger count --id=10XGv2_hgmm6k_out --transcriptome=index/human_10XGv2_primary_and_mouse_10XGv2_primary --fastqs=10XGv2/fastqs --localcores={THREAD} --nosecondary
+        """
+
